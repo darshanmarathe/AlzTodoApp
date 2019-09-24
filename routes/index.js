@@ -12,6 +12,11 @@ router.get('/login', function(req, res, next) {
   res.render('login', { title: 'ALZ Todo App - Login' });
 });
 
+router.post('/login', function(req, res, next) {
+  console.log(req.body)
+  res.render('login', { title: 'ALZ Todo App - Login' });
+});
+
 
 /* GET home page. */
 router.get('/register', function(req, res, next) {
