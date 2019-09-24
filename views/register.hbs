@@ -2,28 +2,30 @@
 
 
     <div class="container">
-        <form class="form-signin">
+        <form class="form-signin" action="/register" method="POST">
             <img class="mb-4" src="/docs/4.3/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
             <h1 class="h3 mb-3 font-weight-normal">Please sign up</h1>
             <label for="inputEmail" class="sr-only">Email address</label>
-            <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required=""
-                autofocus="">
-                       <label for="inputEmail" class="sr-only">Email address</label>
-            <input type="text" id="inputName" class="form-control" placeholder="FullName" required="">
- 
+            <input type="email" id="inputEmail" name="email" class="form-control" placeholder="Email address"
+                required="" autofocus="">
+            <label for="inputName" class="sr-only">Full Name</label>
+            <input type="text" id="inputName" name="name" class="form-control" placeholder="FullName" required="">
+
             <label for="inputPassword" class="sr-only">Password</label>
-            <input type="password" id="inputPassword" class="form-control" placeholder="Password" required="">
-            <label for="inputPassword" class="sr-only">Reconfirm Password</label>
-            <input type="password" id="inputConfPassword" class="form-control" placeholder="Confirm Password" required="">
-            
-            <select name="gender" id="inputGender" class="form-control">
-<option>Male</option>
-<option>Female</option>
+            <input type="password" id="inputPassword" name="pass" class="form-control" placeholder="Password"
+                required="">
+            <label for="inputConfPassword" class="sr-only">Reconfirm Password</label>
+            <input type="password" id="inputConfPassword" name="conpass" class="form-control"
+                placeholder="Confirm Password" required="">
+            <label for="inputGender" class="sr-only">Gender</label>
+            <select name="gender" id="inputGender" name="gender" class="form-control">
+                <option>Male</option>
+                <option>Female</option>
 
             </select>
             <div class="checkbox mb-3">
                 <label>
-                    <input type="checkbox" value="remember-me"> I Agree 
+                    <input type="checkbox" value="remember-me"> I Agree
                 </label>
             </div>
             <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>

@@ -23,4 +23,12 @@ router.get('/register', function(req, res, next) {
   res.render('register', { title: 'ALZ Todo App- Register' });
 });
 
+
+/* GET home page. */
+router.post('/register', function(req, res, next) {
+  console.log(req.body);
+  res.render('register', { title: 'ALZ Todo App- Register' });
+});
+
+
 module.exports = router;
