@@ -12,13 +12,13 @@
             <input type="text" id="inputName" name="name" class="form-control" placeholder="FullName" required="">
 
             <label for="inputPassword" class="sr-only">Password</label>
-            <input type="password" id="inputPassword" name="pass" class="form-control" placeholder="Password"
+            <input type="password" id="inputPassword" title="UpperCase, LowerCase and Number" pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*$" name="pass" class="form-control" placeholder="Password"
                 required="">
             <label for="inputConfPassword" class="sr-only">Reconfirm Password</label>
             <input type="password" id="inputConfPassword" name="conpass" class="form-control"
                 placeholder="Confirm Password" required="">
             <label for="inputGender" class="sr-only">Gender</label>
-            <select name="gender" id="inputGender" name="gender" class="form-control">
+            <select name="gender" id="inputGender" name="gender"  class="form-control">
                 <option>Male</option>
                 <option>Female</option>
 
@@ -30,6 +30,23 @@
             </div>
             <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
         </form>
+
+        <script>
+
+             var password = document.getElementById("inputPassword")
+            , confirm_password = document.getElementById("inputConfPassword");
+
+            function validatePassword(){
+            if(password.value != confirm_password.value) {
+                confirm_password.setCustomValidity("Passwords Don't Match");
+            } else {
+                confirm_password.setCustomValidity('');
+            }
+            }
+
+            password.onchange = validatePassword;
+            confirm_password.onkeyup = validatePassword;
+        </script>
     </div> <!-- /container -->
 
 </main>
