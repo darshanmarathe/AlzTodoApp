@@ -14,9 +14,41 @@
     <div class="row">
       <div class="col-md-12">
         <h2>TODO List</h2>
-        <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-        <p><a class="btn btn-secondary" href="#" role="button">View details »</a></p>
-      </div>
+         <form class="form-todo" action="/register" method="POST">
+            <img class="mb-4" src="/docs/4.3/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
+            <h1 class="h3 mb-3 font-weight-normal">Please sign up</h1>
+            <input type="hidden" name="_id" value="">
+            <label for="inputTitle" class="sr-only">Title</label>
+            <input onchange="Handle_UserName(event)" type="text" id="inputTitle" name="title" class="form-control" placeholder="Title"
+                required="" autofocus="">
+            <label for="inputDesc" class="sr-only">Description</label>
+            <textarea name="desc" id="inputDesc" class="form-control" cols="30" rows="10">
+              
+            </textarea>
+            
+            <label for="inputDate" class="sr-only">Target Date Date</label>
+            <input type="datetime" id="inputDate" title="date" name="date" class="form-control" placeholder="Password"
+                required="">
+            {{!-- <label for="inputGender" class="sr-only">Gender</label>
+            <select name="ownerId" id="input" name="gender"  class="form-control">
+                <option>Male</option>
+                <option>Female</option>
+
+            </select> --}}
+            <div class="checkbox mb-3">
+                <label>
+                    <input name="status" type="checkbox" value="remember-me"> I Agree
+                </label>
+            </div>
+            <button onclick="Handle_Submit(event)" class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+        </form>
+
+       
+       
+       </div>
+       <div>
+         grid to come here
+       </div>
     </div>
 
     <hr>

@@ -7,7 +7,6 @@ var Datastore = require('nedb')
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  db.find({} , f)
 
   res.render('index', { title: 'ALZ Todo App' });
 });
