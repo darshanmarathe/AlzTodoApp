@@ -6,10 +6,12 @@ var Datastore = require('nedb')
   , db = new Datastore({ filename: './data/todos.db' , autoload: true });
 
 
-//TODO : we need to fix below 
 /* GET users listing. */
-router.get('/', function(req, res, next) {
-  db.find({}, function (err, docs) {
+router.get('/:owner', function(req, res, next) {
+
+  let userid  =  req.params.owner
+
+  db.find({ownerId : userid}, function (err, docs) {
         res.json(docs);
   });
 });

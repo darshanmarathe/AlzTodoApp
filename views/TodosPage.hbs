@@ -1,60 +1,57 @@
 <main role="main">
 
   <!-- Main jumbotron for a primary marketing message or call to action -->
-  <div class="jumbotron">
-    <div class="container">
-      <h1 class="display-3">{{title}}</h1>
-      <p>This is a template for a simple marketing or informational website. It includes a large callout called a jumbotron and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
-      <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more »</a></p>
-    </div>
-  </div>
 
   <div class="container">
     <!-- Example row of columns -->
     <div class="row">
       <div class="col-md-12">
         <h2>TODO List</h2>
-         <form class="form-todo" action="/register" method="POST">
-            <img class="mb-4" src="/docs/4.3/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
-            <h1 class="h3 mb-3 font-weight-normal">Please sign up</h1>
-            <input type="hidden" name="_id" value="">
-            <label for="inputTitle" class="sr-only">Title</label>
-            <input  type="text" id="inputTitle" name="title" class="form-control" 
-            placeholder="Title"
-                required="" autofocus="">
-            <label for="inputDesc" class="sr-only">Description</label>
-            <textarea placeholder="Give Description" name="desc" id="inputDesc" class="form-control" cols="30" rows="10">
-              
-            </textarea>
-            
-            <label for="inputDate" class="sr-only">Target Date Date</label>
-            <input type="date" id="inputDate"  title="date" name="date" class="form-control" placeholder="Target Date"
-                required="">
-            <label for="inputOwner" class="sr-only">Gender</label>
-            <select name="ownerId" id="inputOwner" name="ownerid"  class="form-control">
-                <option>Male</option>
-                <option>Female</option>
+        <form class="form-todo" action="/register" method="POST">
+          <img class="mb-4" src="/docs/4.3/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
+          <h1 class="h3 mb-3 font-weight-normal">Please sign up</h1>
+          <input type="hidden" name="_id" value="">
+          <label for="inputTitle" class="sr-only">Title</label>
+          <input type="text" id="inputTitle" name="title" class="form-control" placeholder="Title" required=""
+            autofocus="">
+          <label for="inputDesc" class="sr-only">Description</label>
+          <textarea placeholder="Give Description" name="desc" id="inputDesc" class="form-control" cols="30" rows="10">
 
-            </select>
-            <div class="checkbox mb-3">
-              <br>
-                <label>
-                    <input name="status" type="checkbox"  value="remember-me"> Completion Status
-                </label>
-            </div>
-            <button onclick="Handle_Submit(event)" class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+            </textarea>
+
+          <label for="inputDate" class="sr-only">Target Date Date</label>
+          <input type="date" id="inputDate" title="date" name="date" class="form-control" required="">
+          <label for="inputOwner" class="sr-only">Gender</label>
+          <select name="ownerId" id="inputOwner" name="ownerid" class="form-control">
+            <option>Male</option>
+            <option>Female</option>
+
+          </select>
+          <div class="checkbox mb-3">
+            <br>
+            <label>
+              <input name="status" type="checkbox" value="remember-me"> Completion Status
+            </label>
+          </div>
+          <button onclick="Handle_Submit(event)" class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
         </form>
 
 
 
-       
-       
-       </div>
-       <div>
-         grid to come here
-       </div>
+
+
+      </div>
+     
     </div>
 
+<div class="row">
+  <div class="col-12">
+
+     <div id="todoList">
+        Loading your todos please wait .......
+      </div>
+  </div>
+</div>
     <hr>
 
   </div> <!-- /container -->
@@ -62,54 +59,103 @@
 </main>
 
 <script>
+  var user = localStorage.getItem("user");
 
   $(document).ready((e) => {
-    if(localStorage.getItem("user") == null){
+    if (localStorage.getItem("user") == null) {
       window.location = '/login'
     }
+    user = JSON.parse(user)
+
     GetAllUsers();
-    
+    refershGrid();
   })
 
-  function Handle_Submit(e){
-    e.preventDefault();
+  function Handle_Submit(e) {
     debugger;
+    e.preventDefault();
     var todo = $('.form-todo').serializeObject();
-    if(todo._id != ""){
-        $.put('/todos/' , todo , () => {
-          refershGrid();
-        })
-    }else{
-        delete todo._id;
-        $.post('/todos/' , todo , () => {
-          refershGrid();
-        })
+    if (todo._id != "") {
+      $.put('/todos/', todo, () => {
+        refershGrid();
+      })
+    } else {
+      delete todo._id;
+      $.post('/todos/', todo, () => {
+        refershGrid();
+      })
     }
   }
 
-  function GetAllUsers(){
-    $.get('/users/' , function(data) {
-      
-      debugger;
-        let options = data.map((d) => {
-          return '<option value="' + d.ownerid + '">' + d.ownerid + '</option>';
-        })
+  function GetAllUsers() {
+    $.get('/users/', function (data) {
 
-        console.log(options);
+      let options = data.map((d) => {
+        return '<option value="' + d.ownerid + '">' + d.ownerid + '</option>';
+      })
 
-        $('#inputOwner').html(options.join())
-        debugger;
-        let user  = localStorage.getItem("user");
-        user  = JSON.parse(user)
-        $('#inputOwner').val(user.username)
+      console.log(options);
+
+      $('#inputOwner').html(options.join())
+     
+      $('#inputOwner').val(user.username)
 
 
     })
   }
 
-  function  refershGrid(){
-    $.get('/todos/' , function(data) {
-      console.log(data)
+  function refershGrid() {
+    $.get('/todos/' + user.username, function (data) {
+      //tableCreate('todoList', data)
+      window.myTodos  =  data;
+      var source   = document.getElementById("todo-template").innerHTML;
+      var template = Handlebars.compile(source);
+      var html    = template({
+        todos : data
+      });
+      $('#todoList').html(html)
     })
   }
+
+  function Edit(_id){
+    let currentTodo = window.myTodos.find(function(todo)  {
+      return todo._id  == _id;
+    })
+    debugger;
+    if(currentTodo){
+      let allKeys =  Object.keys(currentTodo);
+
+      for(let key of allKeys){
+        let element = document.getElementsByName(key)[0]
+        element.value = currentTodo[key];
+      }
+
+    }
+  }
+
+  
+  function Delete(_id){
+   if(confirm("are you sure you want to delete")){
+     $.delete('/todos/' + _id , function(){
+       refershGrid();
+     })
+   }
+  }
+</script>
+
+<script id="todo-template" type="text/x-handlebars-template">
+  <div class="entry">
+ 
+ \{{#each todos}}
+    <b>\{{title}}</b>
+    <div>
+      \{{desc}}
+      Completion Date
+      \{{date}}
+      <button class="right btn btn-danger" onclick="Delete('\{{_id}}')">Delete</button>
+      <button class="right btn btn-primary" onclick="Edit('\{{_id}}')"  >Edit</button>
+  </div>
+    <hr>
+  \{{/each}}
+  </div>
 </script>
