@@ -1,3 +1,42 @@
+
+<script>
+
+function Handle_Login(e){
+    debugger;
+    e.preventDefault();
+    var inputs  = document.querySelectorAll('.form-signin input');
+
+    var obj = {};
+    inputs.forEach(function(elem) {
+            if(elem.name) {
+                obj[elem.name] = elem.value;
+            }
+    } );
+    postData('/users/login' , obj).then(function(user)  {
+        debugger;
+        console.log(user);
+        localStorage.setItem("user" , user);
+        window.location = '/TodosPage';
+    })
+}
+
+async function postData(url = '', data = {}) {
+  // Default options are marked with *
+  const response = await fetch(url, {
+    method: 'POST', // *GET, POST, PUT, DELETE, etc.
+    mode: 'cors', // no-cors, *cors, same-origin
+    cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+    credentials: 'same-origin', // include, *same-origin, omit
+    headers: {
+      'Content-Type': 'application/json'
+      // 'Content-Type': 'application/x-www-form-urlencoded',
+    },
+    body: JSON.stringify(data) // body data type must match "Content-Type" header
+  });
+  return await response.json(); // parses JSON response into native JavaScript objects
+}
+
+</script>
 <main role="main">
 
 
@@ -15,7 +54,7 @@
                     <input type="checkbox" value="remember-me"> Remember me
                 </label>
             </div>
-            <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+            <button onclick="return Handle_Login(event);" class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
         </form>
         <div class="alert alert-danger">
 
