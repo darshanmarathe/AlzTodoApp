@@ -15,12 +15,16 @@ npm run start
 
 
 new feature
-git checkout -b new_feature
+git checkout -b <branch_name>
 code something...
 git add .
 git commit -m "message"
 git push X
-git push --set-upstream origin new_feature
+git push --set-upstream origin <branch_name>
+
+new feature contributor
+git pull
+swbranch <branch_name>
 
 Go to repository 
 Create pull Request
