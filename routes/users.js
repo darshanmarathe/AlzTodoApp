@@ -10,7 +10,13 @@ var Datastore = require('nedb')
 router.get('/', function(req, res, next) {
 
   db.find({}, function (err, docs) {
-        res.json(docs);
+    var data  =  docs.map(function (doc) {
+      return {
+        ownerid : doc.email
+      }
+    })    
+    
+    res.json(data);
   });
 });
 

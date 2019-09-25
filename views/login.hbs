@@ -14,11 +14,22 @@ function Handle_Login(e){
     } ); 
     */
 
+    $(document).ready((e) => {
+        localStorage.setItem("user" , null);
+    })
+
     var obj =  $( ".form-signin" ).serializeObject();
 
     postData('/users/login' , obj).then(function(user)  {
-        localStorage.setItem("user" , user);
-        window.location = '/TodosPage';
+       $('#message').hide();
+       $('#message').html('')
+        if(user.login == true) {
+            localStorage.setItem("user" , JSON.stringify(user));
+            window.location = '/TodosPage'; 
+        }else{
+            $('#message').html("Login failed ... sorry");
+            $('#message').show();
+        }
     })
 }
 
@@ -43,7 +54,7 @@ function Handle_Login(e){
             </div>
             <button onclick="return Handle_Login(event);" class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
         </form>
-        <div class="alert alert-danger">
+        <div class="alert alert-danger" style="display: none" id="message">
 
             {{message}}
         </div>
