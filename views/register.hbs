@@ -2,11 +2,11 @@
 
 
     <div class="container">
-        <form class="form-signin" action="/register" method="POST">
+        <form class="form-signup" action="/register" method="POST">
             <img class="mb-4" src="/docs/4.3/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
             <h1 class="h3 mb-3 font-weight-normal">Please sign up</h1>
             <label for="inputEmail" class="sr-only">Email address</label>
-            <input type="email" id="inputEmail" name="email" class="form-control" placeholder="Email address"
+            <input onchange="Handle_UserName(event)" type="email" id="inputEmail" name="email" class="form-control" placeholder="Email address"
                 required="" autofocus="">
             <label for="inputName" class="sr-only">Full Name</label>
             <input type="text" id="inputName" name="name" class="form-control" placeholder="FullName" required="">
@@ -28,7 +28,7 @@
                     <input type="checkbox" value="remember-me"> I Agree
                 </label>
             </div>
-            <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+            <button onclick="Handle_Submit(event)" class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
         </form>
 
         <script>
@@ -46,6 +46,28 @@
 
             password.onchange = validatePassword;
             confirm_password.onkeyup = validatePassword;
+
+            function Handle_Submit(e){
+                var obj =  $( ".form-signup" ).serializeObject();
+
+                var endpoint  = '/users/login' + obj.email + '/' + obj.pass
+                postData('/users/' , obj).then(function(user)  {
+                    window.location = '/Login';
+                })
+            }
+
+            
+         function Handle_UserName(e){
+debugger;
+                var email =  $( "#inputEmail" ).val();
+
+                $.get('/users/' + email , function(data) {
+                    if(data.length > 0){
+                        alert('hey email already exist try to recover password or use diffrent username');
+                        $( "#inputEmail" ).val('').focus();
+                    }
+                })
+            }
         </script>
     </div> <!-- /container -->
 
