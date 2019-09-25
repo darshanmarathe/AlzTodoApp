@@ -22,6 +22,15 @@ router.get('/', function(req, res, next) {
 
 
 /* GET users listing. */
+router.get('/all', function(req, res, next) {
+
+  db.find({}, function (err, docs) {
+    
+    res.json(docs);
+  });
+});
+
+/* GET users listing. */
 router.get('/:email', function(req, res, next) {
   var email = req.params.email;
   db.find({email : email}, function (err, docs) {
