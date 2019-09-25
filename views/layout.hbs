@@ -5,7 +5,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel='stylesheet' href='/stylesheets/style.css' />
     <script src="https://code.jquery.com/jquery-3.1.0.js"></script>
-    
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.3.1/handlebars.min.js" integrity="sha256-2i93NJ4al2OcU9jFNXPMUF2X9xSFRFbTl5X06omT9CM=" crossorigin="anonymous"></script>
     <script src="/javascripts/index.js"></script>
   </head>
@@ -21,14 +21,12 @@
       <li class="nav-item active">
         <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/Login">Login</a>
+      <li id="navTodo" class="nav-item" style="display: none">
+        <a  class="nav-link" href="/TodosPage">My Todos</a>
       </li>
+
       <li class="nav-item">
-        <a class="nav-link" href="/Register">Register</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link disabled" href="#">Disabled</a>
+        <a id="navRegister" class="nav-link" href="/Register">Register</a>
       </li>
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Dropdown</a>
@@ -38,16 +36,31 @@
           <a class="dropdown-item" href="#">Something else here</a>
         </div>
       </li>
+      <li class="nav-item">
+        <a id="navLogin" class="nav-link" href="/Login">Login</a>
+      </li>
     </ul>
-    <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-    </form>
+   <div id="userdiv" style="color: white">
+     
+   </div>
   </div>
 </nav>
     {{{body}}}
     <footer class="container">
   <p>© Company 2017-2019</p>
 </footer>
+<script>
+  $(document).ready(() => {
+    let user =  localStorage.getItem("user")
+    if(user != "null"){
+      debugger;
+      user = JSON.parse(user);
+      $('#userdiv').html('welcome ' + user.name);
+      $('#navLogin').html("Logout")
+      $('#navRegister').hide();
+      $('#navTodo').show();
+    }
+  })
+</script>
   </body>
 </html>

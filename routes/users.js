@@ -50,7 +50,7 @@ router.post('/login' , function(req, res, next) {
  
   db.find({email : user.email , pass: user.pass}, function (err, docs) {   // Callback is optional
    if(docs.length > 0) {
-    res.json({login: true, username : user.email , loggedinTime : new Date()});
+    res.json({login: true, username : user.email , loggedinTime : new Date() , name : docs[0].name});
     return;
    }else{
     res.json({login: false});

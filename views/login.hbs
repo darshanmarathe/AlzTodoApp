@@ -1,6 +1,11 @@
 
 <script>
 
+     $(document).ready(() => {
+        localStorage.setItem("user" , null);
+    })
+
+
 function Handle_Login(e){
     debugger;
     e.preventDefault();
@@ -14,10 +19,7 @@ function Handle_Login(e){
     } ); 
     */
 
-    $(document).ready((e) => {
-        localStorage.setItem("user" , null);
-    })
-
+   
     var obj =  $( ".form-signin" ).serializeObject();
 
     postData('/users/login' , obj).then(function(user)  {
