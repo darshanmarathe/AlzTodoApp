@@ -6,8 +6,11 @@ var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-var todoRouter = require('./routes/todo')
+var todoRouter = require('./routes/todo');
 
+
+let appInsights = require("applicationinsights");
+appInsights.setup("c25c7fd2-2309-4bdc-8b3f-436e55946ffd").start();
 var app = express();
 
 // view engine setup
