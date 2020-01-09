@@ -13,6 +13,8 @@ git pull
 npm install 
 npm run start
 
+Setting up jenkins
+
 
 new feature
 git checkout -b <branch_name>
