@@ -13,6 +13,9 @@ git pull
 npm install 
  npm run start
 
+
+ 
+
 new feature
  git checkout -b <branch_name>
 code something...
