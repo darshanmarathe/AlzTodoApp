@@ -13,8 +13,6 @@ git pull
 npm install 
 
 
-Something reakkt
-
 
  npm run start
 
