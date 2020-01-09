@@ -12,7 +12,6 @@ npm run start
 git pull
 npm install 
 npm run start
-testing continues integration
 
 new feature
 git checkout -b <branch_name>
