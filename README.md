@@ -12,7 +12,7 @@ npm run start
 git pull
 npm install 
  npm run start
-Hello
+
 new feature
  git checkout -b <branch_name>
 code something...
