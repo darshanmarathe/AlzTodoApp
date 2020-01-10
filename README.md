@@ -37,3 +37,4 @@ Express
 Bootstrap
 nedb
 jquery
+jest
