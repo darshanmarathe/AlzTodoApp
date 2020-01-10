@@ -36,3 +36,4 @@ Nodejs
 Express
 Bootstrap
 nedb
+jquery
