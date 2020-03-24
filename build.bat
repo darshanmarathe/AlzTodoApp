@@ -6,6 +6,7 @@
   call :get-ini deploy.ini build tag TAG 
   call :get-ini deploy.ini build imageTag IMAGETAG 
   echo r=%TARGET% %INSTANCE% %TAG% %IMAGETAG%
+  npm run start
 
   goto :eof
 
